@@ -15,7 +15,7 @@ public class ScavHuntViewModel extends AndroidViewModel {
         allScavHunts = shRepository.getAllHunts();
     }
 
-    LiveData<List<ScavHunt>> getAllWords() { return allScavHunts; }
+    LiveData<List<ScavHunt>> getAllScavHunts() { return allScavHunts; }
 
     public void insert(ScavHunt scavHunt) { shRepository.insert(scavHunt); }
 }

@@ -1,8 +1,11 @@
 package com.example.josh.scavvy;
 
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -17,12 +20,17 @@ import android.widget.LinearLayout;
 import com.example.kobe.scavvy.ScavHuntActivity;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private ArrayList<ScavHunt> scavHunts = new ArrayList<ScavHunt>();
-
+    private ScavHuntViewModel mScavHuntViewModel;
+    private ScavHuntListAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -43,6 +51,14 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+        mScavHuntViewModel = ViewModelProviders.of(this).get(ScavHuntViewModel.class);
+        mScavHuntViewModel.getAllScavHunts().observe(this, new Observer<List<ScavHunt>>() {
+            @Override
+            public void onChanged(@Nullable final List<ScavHunt> scavHunts) {
+                // Update the cached copy of the words in the adapter.
+                adapter.setScavHunts(scavHunts);
+            }
+        });
         /*makeSampleData();
         LinearLayout yourlayout= (LinearLayout) findViewById(R.id.huntListLayout);
 
