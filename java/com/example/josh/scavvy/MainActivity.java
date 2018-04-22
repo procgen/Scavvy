@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -21,10 +22,14 @@ import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
+
+import com.google.api.services.vision.v1.model.EntityAnnotation;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private ArrayList<ScavHunt> scavHunts = new ArrayList<ScavHunt>();
@@ -49,19 +54,8 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        // Create a media file name
-//        File mediaFile = new File(mediaStorageDir.getPath() + File.separator +
-//                "IMG_TEST" + ".jpg");
         File mediaFile;
-//        try {
-            //mediaFile = File.createTempFile("IMG_TEST", ".jpg", mediaStorageDir);
         mediaFile = new File(mediaStorageDir.getPath() + File.separator + "IMG_TEST" + ".jpg");
-//        }
-//        catch (IOException e)
-//        {
-//            Log.d("ScavvyPics", "failed to create temp file");
-//            return null;
-//        }
         return mediaFile;
     }
 
@@ -112,25 +106,53 @@ public class MainActivity extends AppCompatActivity {
             btn.setText(scavHunts.get(i).getName());
             yourlayout.addView(btn);
         }
+
+
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-//            Bundle extras = data.getExtras();
-//            Bitmap imageBitmap = (Bitmap) extras.get("data");
-//            ImageView imageView = (ImageView) findViewById(R.id.imageView);
-//            imageView.setImageBitmap(imageBitmap);
             File imgFile = getOutputMediaFile();
 
             if(imgFile.exists()){
 
-                Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+                final Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
 
                 ImageView myImage = (ImageView) findViewById(R.id.imageView);
 
                 myImage.setImageBitmap(myBitmap);
 
+                final VisionSingle vision = VisionSingle.getInstance();
+                AsyncTask.execute(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+
+                            final List<EntityAnnotation> labels = vision.visionRequest(myBitmap);
+                            for (EntityAnnotation label : labels)
+                            {
+                                Log.d("vision", "Label: " + label.getDescription() + " " + label.getScore());
+                            }
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    String message = "";
+                                    for (EntityAnnotation label : labels)
+                                    {
+                                        message += label.getDescription() + ": " + label.getScore() +", ";
+                                    }
+                                    Toast.makeText(getApplicationContext(),
+                                            message, Toast.LENGTH_LONG).show();
+                                }
+                            });
+                        }
+                        catch (IOException e)
+                        {
+                            Log.d("vision", "Vision request gave IOException");
+                        }
+                    }
+                });
             }
         }
     }
