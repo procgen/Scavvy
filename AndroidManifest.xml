@@ -7,8 +7,7 @@
     <uses-feature android:name="android.hardware.camera" />
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -42,8 +41,9 @@
             android:name=".ViewPhotoActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_view_photo"
-            android:theme="@style/FullscreenTheme"></activity>
-        <activity android:name="com.example.kobe.scavvy.ScavHuntActivity"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name="com.example.kobe.scavvy.ScavHuntActivity" />
+        <activity android:name=".TakePhotoActivity"></activity>
     </application>
 
 </manifest>

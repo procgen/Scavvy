@@ -32,7 +32,6 @@ import com.example.kobe.scavvy.ScavHuntActivity;
 import com.google.api.services.vision.v1.model.EntityAnnotation;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,7 +39,6 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<ScavHunt> scavHunts = new ArrayList<ScavHunt>();
     private ScavHuntViewModel mScavHuntViewModel;
     private ScavHuntListAdapter adapter;
-    static final int REQUEST_IMAGE_CAPTURE = 1;
     static final int REQUEST_WRITE_PERMISSION = 2;
 
     private File getOutputMediaFile(){
@@ -79,19 +77,8 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-                    File photoFile = null;
-                    photoFile = getOutputMediaFile();
-                    if(photoFile != null) {
-                        Uri photoURI = FileProvider.getUriForFile(MainActivity.this,
-                                "com.example.android.fileprovider",
-                                photoFile);
-                        takePictureIntent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
-                        takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
-                        startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
-                    }
-                }
+                Intent takePhotoActivity = new Intent(MainActivity.this, TakePhotoActivity.class);
+                startActivity(takePhotoActivity);
             }
         });
         ImageView imgView = (ImageView) findViewById(R.id.imageView);
@@ -122,49 +109,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-            File imgFile = getOutputMediaFile();
 
-            if(imgFile.exists()){
-
-                final Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
-
-                ImageView myImage = (ImageView) findViewById(R.id.imageView);
-
-                myImage.setImageBitmap(myBitmap);
-
-                final VisionSingle vision = VisionSingle.getInstance();
-                AsyncTask.execute(new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-
-                            final List<EntityAnnotation> labels = vision.visionRequest(myBitmap);
-                            for (EntityAnnotation label : labels)
-                            {
-                                Log.d("vision", "Label: " + label.getDescription() + " " + label.getScore());
-                            }
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    String message = "";
-                                    for (EntityAnnotation label : labels)
-                                    {
-                                        message += label.getDescription() + ": " + label.getScore() +", ";
-                                    }
-                                    Toast.makeText(getApplicationContext(),
-                                            message, Toast.LENGTH_LONG).show();
-                                }
-                            });
-                        }
-                        catch (IOException e)
-                        {
-                            Log.d("vision", "Vision request gave IOException");
-                        }
-                    }
-                });
-            }
-        }
     }
 
     @Override
@@ -189,23 +134,4 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    /*public void makeSampleData(){
-        //Make mammals scavhunt
-        ArrayList<ScavItem> scavItems = new ArrayList<ScavItem>();
-        scavItems.add(new ScavItem("Cat"));
-        scavItems.add(new ScavItem("Dog"));
-        scavItems.add(new ScavItem("Human"));
-        scavItems.add(new ScavItem("Squirrel"));
-        scavItems.add(new ScavItem("Cow"));
-        scavItems.add(new ScavItem("Sheep"));
-        ScavHunt bigAnimals = new ScavHunt("Mammals", scavItems, 0);
-        this.scavHunts.add(bigAnimals);
-        scavItems.clear();
-        scavItems.add(new ScavItem("Doritos"));
-        scavItems.add(new ScavItem("Mountain Dew"));
-        scavItems.add(new ScavItem("Cheeto Dust"));
-        scavItems.add(new ScavItem("Waifu"));
-        ScavHunt neckbeard_shit = new ScavHunt("Neckbeard Shit", scavItems, 0);
-        this.scavHunts.add(neckbeard_shit);
-    }*/
 }
