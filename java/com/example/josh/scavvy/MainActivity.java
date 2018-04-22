@@ -116,26 +116,6 @@ public class MainActivity extends AppCompatActivity {
                 adapter.setScavHunts(scavHunts);
             }
         });
-        /*makeSampleData();
-        LinearLayout yourlayout= (LinearLayout) findViewById(R.id.huntListLayout);
-
-        for (int i = 0; i < scavHunts.size(); i++) {
-            Button btn = new Button (MainActivity.this);
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
-                    LinearLayout.LayoutParams.MATCH_PARENT);
-            btn.setLayoutParams(params);
-            btn.setTextSize(32);
-            btn.setText(scavHunts.get(i).getName());
-            btn.setOnClickListener(new View.OnClickListener(){
-                @Override
-                public void onClick(View view) {
-                    Intent myIntent = new Intent(MainActivity.this, ScavHuntActivity.class);
-                    myIntent.putExtra("key", scavHunts.get(i)); //Optional parameters
-                    MainActivity.this.startActivity(myIntent);
-                }
-            });
-            yourlayout.addView(btn);
-        }
 
 
     }
@@ -184,7 +164,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
             }
-        }*/
+        }
     }
 
     @Override
