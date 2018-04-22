@@ -91,6 +91,15 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+        ImageView imgView = (ImageView) findViewById(R.id.imageView);
+        imgView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent viewPictureIntent = new Intent(MainActivity.this, ViewPhotoActivity.class);
+                viewPictureIntent.putExtra("uri", getOutputMediaFile().getAbsolutePath());
+                startActivity(viewPictureIntent);
+            }
+        });
         makeSampleData();
         LinearLayout yourlayout= (LinearLayout) findViewById(R.id.huntListLayout);
 
