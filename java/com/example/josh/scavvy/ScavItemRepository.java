@@ -6,27 +6,25 @@ import android.os.AsyncTask;
 
 import java.util.List;
 
-public class ScavHuntRepository {
-
+public class ScavItemRepository {
     private ScavHuntDao scavHuntDao;
-    private LiveData<List<ScavHunt>> scavHunts;
+    private LiveData<List<ScavItem>> scavItems;
 
-    ScavHuntRepository(Application application) {
+    ScavItemRepository(Application application, int scavHuntID) {
         AppDatabase db = AppDatabase.getDatabase(application);
         scavHuntDao = db.scavHuntDao();
-        scavHunts = scavHuntDao.getAllScavHunts();
+        scavItems = scavHuntDao.getScavItems(scavHuntID);
     }
 
-    public void insert (ScavHunt scavHunt) {
-        new insertAsyncTask(scavHuntDao).execute(scavHunt);
+    public void insert (ScavItem scavItem) {
+        new ScavItemRepository.insertAsyncTask(scavHuntDao).execute(scavItem);
     }
 
-
-    LiveData<List<ScavHunt>> getAllHunts() {
-        return scavHunts;
+    LiveData<List<ScavItem>> getAllItems() {
+        return scavItems;
     }
 
-    private static class insertAsyncTask extends AsyncTask<ScavHunt, Void, Void> {
+    private static class insertAsyncTask extends AsyncTask<ScavItem, Void, Void> {
 
         private ScavHuntDao mAsyncTaskDao;
 
@@ -35,7 +33,7 @@ public class ScavHuntRepository {
         }
 
         @Override
-        protected Void doInBackground(final ScavHunt... params) {
+        protected Void doInBackground(final ScavItem... params) {
             mAsyncTaskDao.insert(params[0]);
             return null;
         }
