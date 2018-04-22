@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
@@ -36,7 +38,12 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-        makeSampleData();
+        RecyclerView recyclerView = findViewById(R.id.recyclerview);
+        final ScavHuntListAdapter adapter = new ScavHuntListAdapter(this);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        /*makeSampleData();
         LinearLayout yourlayout= (LinearLayout) findViewById(R.id.huntListLayout);
 
         for (int i = 0; i < scavHunts.size(); i++) {
@@ -49,13 +56,13 @@ public class MainActivity extends AppCompatActivity {
             btn.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View view) {
-                    /*Intent myIntent = new Intent(MainActivity.this, ScavHuntActivity.class);
+                    Intent myIntent = new Intent(MainActivity.this, ScavHuntActivity.class);
                     myIntent.putExtra("key", scavHunts.get(i)); //Optional parameters
-                    MainActivity.this.startActivity(myIntent);*/
+                    MainActivity.this.startActivity(myIntent);
                 }
             });
             yourlayout.addView(btn);
-        }
+        }*/
     }
 
     @Override
@@ -80,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void makeSampleData(){
+    /*public void makeSampleData(){
         //Make mammals scavhunt
         ArrayList<ScavItem> scavItems = new ArrayList<ScavItem>();
         scavItems.add(new ScavItem("Cat"));
@@ -98,5 +105,5 @@ public class MainActivity extends AppCompatActivity {
         scavItems.add(new ScavItem("Waifu"));
         ScavHunt neckbeard_shit = new ScavHunt("Neckbeard Shit", scavItems, 0);
         this.scavHunts.add(neckbeard_shit);
-    }
+    }*/
 }

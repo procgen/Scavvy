@@ -15,17 +15,18 @@ public class ScavHunt {
     private int shID;
     @ColumnInfo(name = "name")
     private String name;
-    private ArrayList<ScavItem> items;
+    //private ArrayList<ScavItem> items;
     @ColumnInfo(name = "numFound")
     private Integer numFound;
 
-    public ScavHunt(@NonNull String name, ArrayList<ScavItem> items, Integer numFound){
+    public ScavHunt(@NonNull String name, Integer numFound){
         this.name = name;
-        this.items = items;
         this.numFound = numFound;
     }
     public String getName(){
         return name;
     }
-    public int getshID() { return shID; }
+    public int getShID() { return shID; }
+    public Integer getNumFound() { return numFound; }
+    public void setShID(int shID){this.shID = shID;}
 }
