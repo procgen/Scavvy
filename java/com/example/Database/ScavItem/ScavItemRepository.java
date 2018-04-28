@@ -1,8 +1,11 @@
-package com.example.josh.scavvy;
+package com.example.Database.ScavItem;
 
 import android.app.Application;
 import android.arch.lifecycle.LiveData;
 import android.os.AsyncTask;
+
+import com.example.Database.AppDatabase;
+import com.example.Database.ScavHunt.ScavHuntDao;
 
 import java.util.List;
 

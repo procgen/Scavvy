@@ -1,4 +1,4 @@
-package com.example.josh.scavvy;
+package com.example.CameraVision;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -12,6 +12,8 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
+
+import com.example.josh.scavvy.R;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.

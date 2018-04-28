@@ -1,4 +1,4 @@
-package com.example.josh.scavvy;
+package com.example.Database.ScavHunt;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -6,6 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.example.josh.scavvy.R;
 
 import java.util.List;
 
@@ -23,7 +25,7 @@ public class ScavHuntListAdapter extends RecyclerView.Adapter<ScavHuntListAdapte
     private final LayoutInflater mInflater;
     private List<ScavHunt> scavHunts; // Cached copy of words
 
-    ScavHuntListAdapter(Context context) { mInflater = LayoutInflater.from(context); }
+    public ScavHuntListAdapter(Context context) { mInflater = LayoutInflater.from(context); }
 
     @Override
     public ScavHuntViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -42,7 +44,7 @@ public class ScavHuntListAdapter extends RecyclerView.Adapter<ScavHuntListAdapte
         }
     }
 
-    void setScavHunts(List<ScavHunt> words){
+    public void setScavHunts(List<ScavHunt> words){
         scavHunts = words;
         notifyDataSetChanged();
     }

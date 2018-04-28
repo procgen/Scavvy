@@ -1,10 +1,12 @@
-package com.example.josh.scavvy;
+package com.example.Database.ScavItem;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.ForeignKey;
 import android.arch.persistence.room.Index;
 import android.support.annotation.NonNull;
+
+import com.example.Database.ScavHunt.ScavHunt;
 //import android.arch.persistence.room.PrimaryKey;
 
 

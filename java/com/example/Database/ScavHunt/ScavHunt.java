@@ -1,4 +1,4 @@
-package com.example.josh.scavvy;
+package com.example.Database.ScavHunt;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;

@@ -1,4 +1,4 @@
-package com.example.josh.scavvy;
+package com.example.CameraVision;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -13,8 +13,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 import android.os.Environment;
 import android.support.v4.app.ActivityCompat;
@@ -22,6 +20,7 @@ import android.Manifest;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.example.josh.scavvy.R;
 import com.google.api.services.vision.v1.model.EntityAnnotation;
 
 import java.io.File;

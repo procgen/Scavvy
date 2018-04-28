@@ -17,7 +17,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name="com.example.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -38,12 +38,12 @@
         </provider>
 
         <activity
-            android:name=".ViewPhotoActivity"
+            android:name="com.example.CameraVision.ViewPhotoActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_view_photo"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name="com.example.kobe.scavvy.ScavHuntActivity" />
-        <activity android:name=".TakePhotoActivity"></activity>
+        <activity android:name="com.example.CameraVision.TakePhotoActivity"></activity>
     </application>
 
 </manifest>

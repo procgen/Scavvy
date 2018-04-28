@@ -1,4 +1,4 @@
-package com.example.josh.scavvy;
+package com.example.CameraVision;
 
 import android.graphics.Bitmap;
 

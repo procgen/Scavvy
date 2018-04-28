@@ -1,4 +1,4 @@
-package com.example.josh.scavvy;
+package com.example.Database;
 
 import android.arch.persistence.db.SupportSQLiteDatabase;
 import android.arch.persistence.room.Database;
@@ -7,6 +7,10 @@ import android.arch.persistence.room.RoomDatabase;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
+
+import com.example.Database.ScavHunt.ScavHunt;
+import com.example.Database.ScavHunt.ScavHuntDao;
+import com.example.Database.ScavItem.ScavItem;
 
 @Database(entities = {ScavHunt.class, ScavItem.class}, version = 1)
 public abstract class AppDatabase extends RoomDatabase {

@@ -1,20 +1,14 @@
-package com.example.josh.scavvy;
+package com.example;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.Manifest;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
-import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -23,13 +17,12 @@ import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.Toast;
 
-import com.example.kobe.scavvy.ScavHuntActivity;
-import com.google.api.services.vision.v1.model.EntityAnnotation;
+import com.example.CameraVision.TakePhotoActivity;
+import com.example.Database.ScavHunt.ScavHunt;
+import com.example.Database.ScavHunt.ScavHuntListAdapter;
+import com.example.Database.ScavHunt.ScavHuntViewModel;
+import com.example.josh.scavvy.R;
 
 import java.io.File;
 import java.util.ArrayList;

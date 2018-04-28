@@ -1,4 +1,4 @@
-package com.example.josh.scavvy;
+package com.example.Database.ScavHunt;
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.LiveData;
@@ -15,7 +15,7 @@ public class ScavHuntViewModel extends AndroidViewModel {
         allScavHunts = shRepository.getAllHunts();
     }
 
-    LiveData<List<ScavHunt>> getAllScavHunts() { return allScavHunts; }
+    public LiveData<List<ScavHunt>> getAllScavHunts() { return allScavHunts; }
 
     public void insert(ScavHunt scavHunt) { shRepository.insert(scavHunt); }
 }
