@@ -13,6 +13,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.os.Environment;
 import android.support.v4.app.ActivityCompat;
@@ -106,9 +108,8 @@ public class TakePhotoActivity extends AppCompatActivity {
                                 @Override
                                 public void run() {
                                     String message = "";
-                                    for (EntityAnnotation label : labels)
-                                    {
-                                        message += label.getDescription() + ": " + label.getScore() +", ";
+                                    for (EntityAnnotation label : labels) {
+                                        message += label.getDescription() + ": " + label.getScore() + ", ";
                                     }
                                     Toast.makeText(getApplicationContext(),
                                             message, Toast.LENGTH_LONG).show();

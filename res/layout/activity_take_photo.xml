@@ -25,4 +25,12 @@
             android:indeterminate="true" />
     </RelativeLayout>
 
+    <LinearLayout
+        android:id="@+id/labelLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+    </LinearLayout>
+
 </android.support.constraint.ConstraintLayout>

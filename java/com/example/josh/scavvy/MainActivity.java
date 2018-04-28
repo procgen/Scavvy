@@ -81,15 +81,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(takePhotoActivity);
             }
         });
-        ImageView imgView = (ImageView) findViewById(R.id.imageView);
-        imgView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent viewPictureIntent = new Intent(MainActivity.this, ViewPhotoActivity.class);
-                viewPictureIntent.putExtra("uri", getOutputMediaFile().getAbsolutePath());
-                startActivity(viewPictureIntent);
-            }
-        });
+
         RecyclerView recyclerView = findViewById(R.id.recyclerview);
         final ScavHuntListAdapter adapter = new ScavHuntListAdapter(this);
         recyclerView.setAdapter(adapter);
